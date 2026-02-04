@@ -15,11 +15,12 @@ SERIAL_DRIVER = vendor
 
 # Optical sensor driver for trackball.
 POINTING_DEVICE_ENABLE = yes
-# POINTING_DEVICE_DRIVER = pmw3360
+POINTING_DEVICE_DRIVER = pmw3360
 
-POINTING_DEVICE_DRIVER = custom
-SRC += drivers/pmw3360/pmw3360.c
-QUANTUM_LIB_SRC += spi_master.c # Optical sensor use SPI to communicate
+# old code from https://github.com/idank/qmk_firmware/tree/keyball-updated/keyboards/keyball
+# POINTING_DEVICE_DRIVER = custom
+# SRC += drivers/pmw3360/pmw3360.c
+# QUANTUM_LIB_SRC += spi_master.c # Optical sensor use SPI to communicate
 
 # This is unnecessary for processing KC_MS_BTN*.
 MOUSEKEY_ENABLE = yes

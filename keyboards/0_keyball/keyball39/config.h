@@ -16,8 +16,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// https://github.com/idank/qmk_firmware/blob/keyball-updated/keyboards/keyball/keyball39/config.h
-
 #pragma once
 
 // Key matrix parameters
@@ -36,12 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define SPLIT_USB_DETECT
 //#define SPLIT_USB_TIMEOUT       500
 
-// If your PC does not recognize Keyball, try setting this macro. This macro
-// increases the firmware size by 200 bytes, so it is disabled by default, but
-// it has been reported to work well in such cases.
-//#define SPLIT_WATCHDOG_ENABLE
-
-#define SPLIT_TRANSACTION_IDS_KB KEYBALL_GET_INFO, KEYBALL_GET_MOTION, KEYBALL_SET_CPI
+#define SPLIT_TRANSACTION_IDS_KB KEYBALL_GET_INFO
 
 // RGB LED settings
 #define WS2812_DI_PIN       GP0
@@ -60,10 +53,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #    ifndef RGBLIGHT_SAT_STEP
 #        define RGBLIGHT_SAT_STEP   17
 #    endif
-#    define RGBLIGHT_DEFAULT_MODE RGBLIGHT_MODE_RAINBOW_SWIRL
 #endif
 #ifdef RGB_MATRIX_ENABLE
 #    define RGB_MATRIX_SPLIT    { 24, 24 }
+#endif
+
+
+// General config across all keyball keyboards
+
+#define WS2812_DI_PIN GP0
+#ifdef RGBLIGHT_ENABLE
+#    define RGBLIGHT_DEFAULT_MODE RGBLIGHT_MODE_RAINBOW_SWIRL
 #endif
 
 #ifndef OLED_FONT_H
@@ -72,26 +72,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #    define OLED_FONT_END 195
 #endif
 
-#if !defined(LAYER_STATE_8BIT) && !defined(LAYER_STATE_16BIT) && !defined(LAYER_STATE_32BIT)
-#    define LAYER_STATE_8BIT
-#endif
+// This has been reported to help with recognizing the keyboard after booting up when its USB is already connected.
+#define SPLIT_WATCHDOG_ENABLE
+#define SPLIT_WATCHDOG_TIMEOUT 3000
 
 #define SPI_DRIVER SPID0
 #define SPI_SCK_PIN GP22
 #define SPI_MISO_PIN GP20
 #define SPI_MOSI_PIN GP23
+#define PMW33XX_CS_PIN GP21
+#define SPLIT_POINTING_ENABLE
+#define POINTING_DEVICE_COMBINED
 
+// Rotation settings for left side trackball.
+#define POINTING_DEVICE_ROTATION_90
+#define POINTING_DEVICE_INVERT_Y
 
-// #define PMW33XX_CS_PIN GP21
-// #define SPLIT_POINTING_ENABLE
-// #define POINTING_DEVICE_COMBINED
-// // Rotation settings for left side trackball.
-// #define POINTING_DEVICE_ROTATION_90
-// #define POINTING_DEVICE_INVERT_Y
+// Rotation settings for right side trackball.
+#define POINTING_DEVICE_ROTATION_270_RIGHT
+#define POINTING_DEVICE_INVERT_Y_RIGHT
 
-// // Rotation settings for right side trackball.
-// #define POINTING_DEVICE_ROTATION_270_RIGHT
-// #define POINTING_DEVICE_INVERT_Y_RIGHT
-
-// #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
-// #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_TIMEOUT 1000U
+#define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
+#define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_TIMEOUT 1000U

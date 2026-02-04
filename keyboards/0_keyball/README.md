@@ -1,0 +1,1 @@
+qmk compile -kb 0_keyball/keyball39 -km vial
