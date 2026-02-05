@@ -22,14 +22,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MATRIX_ROWS         (4 * 2)  // split keyboard
 #define MATRIX_COLS         6
 #define MATRIX_ROW_PINS     { GP29, GP28, GP27, GP26 }
-#define MATRIX_COL_PINS     { GP4, GP5, GP6, GP7, GP8, GP9}
+#define MATRIX_COL_PINS     { GP4, GP5, GP6, GP7, GP8, GP9 }
 #define MATRIX_MASKED
 #define DEBOUNCE            5
 #define DIODE_DIRECTION     COL2ROW
 
 // Split parameters
-#define SOFT_SERIAL_PIN         GP1
-#define SPLIT_HAND_MATRIX_GRID  GP27, GP9
+#define SERIAL_USART_TX_PIN GP1
+#define SPLIT_HAND_MATRIX_GRID  GP26, GP4
 #define SPLIT_HAND_MATRIX_GRID_LOW_IS_LEFT
 //#define SPLIT_USB_DETECT
 //#define SPLIT_USB_TIMEOUT       500
@@ -39,8 +39,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // RGB LED settings
 #define WS2812_DI_PIN       GP0
 #ifdef RGBLIGHT_ENABLE
-#    define RGBLIGHT_LED_COUNT      48
-#    define RGBLED_SPLIT    { 24, 24 }  // (24 + 22)
+#    define RGBLIGHT_LED_COUNT      60
+#    define RGBLED_SPLIT    { 30, 30 }  // (30 + 29)
 #    ifndef RGBLIGHT_LIMIT_VAL
 #        define RGBLIGHT_LIMIT_VAL  150 // limitated for power consumption
 #    endif
@@ -55,42 +55,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #    endif
 #endif
 #ifdef RGB_MATRIX_ENABLE
-#    define RGB_MATRIX_SPLIT    { 24, 24 }
+#    define RGB_MATRIX_SPLIT    { 30, 30 }
 #endif
-
-
-// General config across all keyball keyboards
-
-#define WS2812_DI_PIN GP0
-#ifdef RGBLIGHT_ENABLE
-#    define RGBLIGHT_DEFAULT_MODE RGBLIGHT_MODE_RAINBOW_SWIRL
-#endif
-
-#ifndef OLED_FONT_H
-#    define OLED_FONT_H "keyboards/0_keyball/lib/logofont/logofont.c"
-#    define OLED_FONT_START 32
-#    define OLED_FONT_END 195
-#endif
-
-// This has been reported to help with recognizing the keyboard after booting up when its USB is already connected.
-#define SPLIT_WATCHDOG_ENABLE
-#define SPLIT_WATCHDOG_TIMEOUT 3000
-
-#define SPI_DRIVER SPID0
-#define SPI_SCK_PIN GP22
-#define SPI_MISO_PIN GP20
-#define SPI_MOSI_PIN GP23
-#define PMW33XX_CS_PIN GP21
-#define SPLIT_POINTING_ENABLE
-#define POINTING_DEVICE_COMBINED
-
-// Rotation settings for left side trackball.
-#define POINTING_DEVICE_ROTATION_90
-#define POINTING_DEVICE_INVERT_Y
-
-// Rotation settings for right side trackball.
-#define POINTING_DEVICE_ROTATION_270_RIGHT
-#define POINTING_DEVICE_INVERT_Y_RIGHT
-
-#define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
-#define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_TIMEOUT 1000U
